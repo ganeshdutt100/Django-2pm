@@ -1,0 +1,26 @@
+{%extend 'base.html'%} {% block content%}
+<div>
+  <h2>our courses</h2>
+</div>
+<div
+  style="
+    width: 300px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 30px;
+  "
+>
+  {% for course in courses %}
+
+  <div>
+    <img src="{{course.image}}" alt="{{course.title}}" width="100%" />
+    <span>{{course.badge}}</span>
+    <h3>{{course.title}}</h3>
+    <p>{{course.instructor}}</p>
+    <p>{{course.duration}}</p>
+    <p>{{course.price}}</p>
+    <button>Enroll Now</button>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
