@@ -1,4 +1,4 @@
-{%extend 'base.html'%} {% block content%}
+{%extends 'base.html'%} {% block content%}
 <div>
   <h2>our courses</h2>
 </div>
@@ -8,6 +8,7 @@
     text-align: center;
     border: 2px solid black;
     border-radius: 30px;
+    margin: 20px;
   "
 >
   {% for course in courses %}

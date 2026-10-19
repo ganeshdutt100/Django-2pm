@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+  <div>
+    <h2>
+      {% if active_tab == 'all' %} All Products {% else %} {{ active_tab }}
+      collection {% endif %}
+    </h2>
+    <p>Showing {{products | length}} items</p>
+  </div>
+
+  <div>
+    <a href="{% url 'shop_all' %}">ALL Items</a>
+    <a href="{% url 'shop_watch' %}">ALL Watches</a>
+    <a href="{% url 'shop_phone' %}">ALL Phones</a>
+  </div>
+
+  <div
+    style="
+      width: 300px;
+      text-align: center;
+      border: 2px solid black;
+      border-radius: 30px;
+      margin: 20px;
+    "
+  >
+    {%for item in products%}
+    <div>
+      <img src="{{item.image}}" alt="" width="100%" />
+      <p>{{item.name}}</p>
+      <p>{{item.category}}</p>
+      <p>{{item.price}}</p>
+      <button>Buy Now</button>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

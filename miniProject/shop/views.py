@@ -1,9 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
 def shop_view(request, category=None):
-    all_products=[
-        # watch 
+    all_products = [
         {
             'name': 'Apple Watch Ultra 2',
             'category': 'watch',
@@ -22,7 +20,6 @@ def shop_view(request, category=None):
             'price': '₹18,495',
             'image': 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&auto=format&fit=crop&q=80'
         },
-        # phone 
         {
             'name': 'iPhone 16 Pro',
             'category': 'phone',
@@ -43,15 +40,15 @@ def shop_view(request, category=None):
         },
     ]
 
-    if category in ['watch','phone']:
-        products =[p for p in all_products if p['category'] == category  ]
-        active_tab  = 'all'
+    if category in ['watch', 'phone']:
+        products = [p for p in all_products if p['category'] == category]
+        active_tab = category
     else:
-        products  = all_products,
-        active_tab = 'all'    
+        products = all_products
+        active_tab = 'all'
 
     context = {
-        'products':products,
-         'active_tab':active_tab         
-    }    
-    return render(request , 'shop/products.html',context)
+        'products': products,
+        'active_tab': active_tab
+    }
+    return render(request, 'shop/products.html', context)
