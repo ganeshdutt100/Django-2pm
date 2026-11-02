@@ -20,8 +20,9 @@ from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',lambda request:redirect('courses')),
+    # path('allProduct/',lambda request:redirect('courses')),
     path('e-learning/',include('elearning.urls')),
-    path('shop/',include('shop.urls'))
+    path('shop/',include('shop.urls')),
+    path("",include('demo.urls'))
 
 ]

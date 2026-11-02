@@ -1,0 +1,37 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'miniProject/css/style.css' %}" />
+  </head>
+  <body>
+    <h1>Welcome to Django</h1>
+    <div class="user-container">
+      {% for user in users %}
+      <div class="user-card">
+        <h3>Name : {{user.name}}</h3>
+        <p>Age : <b>{{user.age}}</b></p>
+        <h2>Skills</h2>
+        <ul class="skills-list">
+          {% for skill in user.skills %}
+          <li>{{skill}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% comment %}
+    <p>Name : <b>{{name}}</b></p>
+    <p>Age : <b>{{age}}</b></p>
+    <h2>Skills</h2>
+    <ul>
+      {% for skill in skills %}
+      <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+    {% endcomment %}
+  </body>
+</html>
