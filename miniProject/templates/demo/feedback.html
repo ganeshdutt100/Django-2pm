@@ -1,0 +1,49 @@
+fF{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'miniProject/css/style.css' %}" />
+  </head>
+  <body>
+    <h1>Welcome to feedback form</h1>
+    <div class="user-container">
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="enter your name" name="name" /> <br />
+        <br />
+        <input type="number" placeholder="enter" name="age" /> <br />
+        <br />
+        <textarea placeholder="feedback" name="feedback"></textarea>
+        <br />
+        <br />
+
+        <input type="submit" />
+      </form>
+    </div>
+    <div>
+      <h2>Feedbacks</h2>
+      <div>
+        {% for user in users %}
+        <div>
+          <p>Name : <b>{{user.name}}</b></p>
+          <p>Age : <b>{{user.age}}</b></p>
+          <p>Feedback : <b>{{user.feedback}}</b></p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% comment %}
+    <p>Name : <b>{{name}}</b></p>
+    <p>Age : <b>{{age}}</b></p>
+    <h2>Skills</h2>
+    <ul>
+      {% for skill in skills %}
+      <li>{{skill}}</li>
+      {% endfor %}
+    </ul>
+    {% endcomment %}
+  </body>
+</html>
