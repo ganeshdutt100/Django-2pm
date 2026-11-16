@@ -1,0 +1,1218 @@
+
+Topics Covered:
+
+1. Prerequisites
+2. Django Basics
+3. URLs and Views
+4. Templates
+
+These notes are written in simple English so you can understand the concepts and explain them to students easily. Each topic includes definitions, examples, code, and practical use cases.
+
+# 0. Prerequisites
+
+Before learning Django, you should understand the following concepts.
+
+ 0.1 Python Basics
+
+Django is a Python-based web framework. So, Python knowledge is required.
+
+You should understand:
+
+| Topic               | Meaning                                     |
+| ------------------- | ------------------------------------------- |
+| Variables           | Store data                                  |
+| Data Types          | int, float, string, list, tuple, dictionary |
+| Conditions          | if, elif, else                              |
+| Loops               | for and while                               |
+| Functions           | Reusable blocks of code                     |
+| OOP                 | Classes and objects                         |
+| Inheritance         | One class uses another class's properties   |
+| Decorators          | Modify or extend function behavior          |
+| Modules             | Reusable Python files                       |
+| Virtual Environment | Separate environment for a project          |
+| pip                 | Python package installer                    |
+
+Example: Python Function
+
+
+def greet(name):    return f"Hello {name}"print(greet("Ganesh"))
+
+
+Output:
+
+
+Hello Ganesh
+
+
+Example: Python Class
+
+
+class Student:    def __init__(self, name, age):        self.name = name        self.age = age    def display(self):        return f"{self.name} is {self.age} years old"student1 = Student("Rahul", 22)print(student1.display())
+
+
+Output:
+
+
+Rahul is 22 years old
+
+
+Why is OOP important in Django?
+
+Django uses classes in models, class-based views, forms, and many other components.
+
+ 0.2 HTML, CSS and JavaScript
+
+These technologies are used to create the frontend of a website.
+
+- HTML: Creates the structure of a webpage.
+- CSS: Adds styling to the webpage.
+- JavaScript: Adds interactivity and dynamic behavior.
+
+Example:
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Django Website</title>
+</head>
+<body>
+
+    <h1>Welcome to Django</h1>
+    <button onclick="alert('Hello!')">
+        Click Me
+    </button>
+
+</body>
+</html>
+
+
+Django can send dynamic data to HTML templates.
+
+For example, Django can send a student's name, email, and marks to an HTML page.
+
+ 0.3 HTTP Basics
+
+HTTP stands for HyperText Transfer Protocol.
+
+It is a communication protocol used between a client and a server.
+
+How does HTTP work?
+
+Client (Browser)
+
+User requests a webpage
+
+HTTP Request / HTTP Response
+
+Django Server
+
+Processes the request
+
+Database
+
+Fetches or saves data if required
+
+ HTTP Methods
+
+| Method | Purpose               | Example                |
+| ------ | --------------------- | ---------------------- |
+| GET    | Retrieve data         | Get all students       |
+| POST   | Send or create data   | Register a student     |
+| PUT    | Replace existing data | Update student details |
+| PATCH  | Partially update data | Change student email   |
+| DELETE | Delete data           | Delete a student       |
+
+ HTTP Status Codes
+
+| Status Code | Meaning               |
+| ----------- | --------------------- |
+| 200         | OK                    |
+| 201         | Created               |
+| 301         | Permanent Redirect    |
+| 302         | Temporary Redirect    |
+| 400         | Bad Request           |
+| 401         | Unauthorized          |
+| 403         | Forbidden             |
+| 404         | Page Not Found        |
+| 500         | Internal Server Error |
+
+ Cookies and Sessions
+
+Cookies: Small pieces of data stored in the user's browser.
+
+Example:
+
+- Remembering user preferences.
+- Storing a session identifier.
+
+Sessions: Sessions allow a server to remember information about a particular user across multiple requests.
+
+Example:
+
+- User logs in.
+- Django creates a session.
+- User opens another page.
+- Django identifies the logged-in user using the session.
+
+ 0.4 SQL Basics
+
+SQL stands for Structured Query Language.
+
+It is used to communicate with relational databases.
+
+Important commands:
+
+
+CREATE TABLE students (
+    id INT,
+    name VARCHAR(100),
+    age INT
+);
+
+
+Insert data:
+
+
+INSERT INTO students
+VALUES (1, 'Rahul', 22);
+
+
+Read data:
+
+
+SELECT * FROM students;
+
+
+Update data:
+
+
+UPDATE students
+SET age = 23
+WHERE id = 1;
+
+
+Delete data:
+
+
+DELETE FROM students
+WHERE id = 1;
+
+
+Django provides an ORM, so you can interact with databases using Python instead of writing SQL for every operation.
+
+ 0.5 Git Basics
+
+Git is a version control system.
+
+It helps developers track changes in their code.
+
+Important commands:
+
+
+git init
+git add .
+git commit -m "Initial commit"
+git status
+git log
+git branch
+git push
+git pull
+
+
+# 1. Django Basics
+
+ 1.1 What is Django?
+
+Definition:
+
+Django is a high-level, open-source Python web framework used to build secure, scalable, and dynamic web applications quickly.
+
+It provides ready-made features like:
+
+- URL routing
+- Authentication
+- Database management
+- Admin panel
+- Form handling
+- Security
+- Session management
+- Template engine
+
+Simple Explanation:
+
+Suppose you want to build a Student Management System.
+
+Without Django, you need to write many things manually:
+
+- Database connection
+- URL handling
+- User authentication
+- Form processing
+- Admin functionality
+
+Django provides many of these features already.
+
+You only need to write the application logic.
+
+ Why do we use Django?
+
+1. It saves development time.
+2. It provides built-in security features.
+3. It supports multiple databases.
+4. It provides a built-in admin panel.
+5. It follows the MVT architecture.
+6. It supports reusable applications.
+7. It provides an ORM for database operations.
+
+ Popular websites and services associated with Django
+
+- Instagram has used Django extensively.
+- Pinterest has used Django.
+- Mozilla has used Django in parts of its web infrastructure.
+
+ 1.2 What is a Framework?
+
+Definition:
+
+A framework is a collection of tools, libraries, and predefined rules that help developers build applications.
+
+For example:
+
+| Language   | Framework              |
+| ---------- | ---------------------- |
+| Python     | Django, Flask, FastAPI |
+| JavaScript | Express.js, NestJS     |
+| PHP        | Laravel                |
+| Java       | Spring Boot            |
+
+Real-life example:
+
+Think about building a house.
+
+Without a framework, you need to arrange everything from the beginning.
+
+With a framework, you already have a basic structure, and you customize it according to your requirements.
+
+Similarly, Django provides a predefined structure for web development.
+
+ 1.3 What is MVT Architecture?
+
+MVT stands for:
+
+- M = Model
+- V = View
+- T = Template
+
+Django follows the MVT architectural pattern.
+
+It separates database logic, application logic, and presentation logic.
+
+ 1. Model
+
+Definition: Model is responsible for handling application data and database operations.
+
+It defines the structure of database tables using Python classes.
+
+Example:
+
+
+from django.db import modelsclass Student(models.Model):    name = models.CharField(max_length=100)    age = models.IntegerField()    email = models.EmailField()
+
+
+Here:
+
+- Student is a model.
+- name is a field.
+- age is a field.
+- email is a field.
+
+Django ORM converts model operations into database queries.
+
+ 2. View
+
+Definition: View is responsible for handling requests, processing application logic, and returning responses.
+
+Example:
+
+
+from django.shortcuts import renderdef home(request):    return render(request, 'home.html')
+
+
+Here, the home view receives a request and returns an HTML page.
+
+ 3. Template
+
+Definition: Template is responsible for displaying data to users.
+
+Templates are generally HTML files containing Django Template Language.
+
+Example:
+
+
+<h1>Welcome to Django</h1>
+<p>Student Name: {{ name }}</p>
+
+
+ Complete MVT Architecture
+
+User / Browser
+
+HTTP Request
+
+URL Dispatcher
+
+Finds the matching URL
+
+View (views.py)
+
+Processes request and application logic
+
+Model
+
+Database operations
+
+Database
+
+Template
+
+HTML presentation
+
+HTML Response
+
+The view can use the model to fetch data and render a template before returning the response.
+
+ MVT Real-Life Example
+
+Suppose a student opens a student profile page.
+
+1. User requests `/student/`.
+2. Django URL dispatcher finds the matching URL.
+3. View function executes.
+4. View gets student data from the Model.
+5. View sends the data to the Template.
+6. Template displays the student details.
+7. Browser shows the final webpage.
+
+Difference between MVC and MVT
+
+| MVC                       | Django MVT                |
+| ------------------------- | ------------------------- |
+| Model                     | Model                     |
+| View                      | Template                  |
+| Controller                | View                      |
+| Handles application logic | Handles application logic |
+
+Remember: Django's View performs much of the responsibility commonly assigned to the Controller in MVC.
+
+ 1.4 Django Installation and Virtual Environment Setup
+
+ Step 1: Check Python Installation
+
+Open your terminal:
+
+
+python --version
+
+
+Or:
+
+
+python3 --version
+
+
+ Step 2: Create a Project Folder
+
+
+mkdir django_project
+cd django_project
+
+
+ Step 3: Create Virtual Environment
+
+
+python -m venv venv
+
+
+What is a Virtual Environment?
+
+A virtual environment is an isolated Python environment used for a particular project.
+
+It allows different projects to use different package versions.
+
+Example:
+
+- Project A uses Django 5.
+- Project B uses Django 6.
+
+Both projects can have their own dependencies.
+
+ Step 4: Activate Virtual Environment
+
+For Windows:
+
+
+venv\Scripts\activate
+
+
+For macOS/Linux:
+
+
+source venv/bin/activate
+
+
+After activation, you will generally see:
+
+
+(venv)
+
+
+ Step 5: Install Django
+
+
+pip install django
+
+
+ Step 6: Check Django Version
+
+
+django-admin --version
+
+
+ Step 7: Create Django Project
+
+
+django-admin startproject myproject
+
+
+ Step 8: Move Inside Project
+
+
+cd myproject
+
+
+ Step 9: Run Development Server
+
+
+python manage.py runserver
+
+
+Output will show a local address similar to:
+
+
+http://127.0.0.1:8000/
+
+
+Open this address in your browser.
+
+[Chapter 1: Introduction to Django | Web Development with Django 6](https://images.openai.com/static-rsc-4/VcZIVgfAmCBAJZzg9dwUJhDv-AGxhQ58AAOt_-MmqO4c_3qaZKbHVZaN-bmeQ2zJ191U1cQEQLJWe40QU3tBnehLOI9QenKaeCMZY9RjVkojoYF5Sxg6Y3s9FAqBz6bw7S15q5LRcWta4JWHEv8UQ4Uie_XymTOmOvBKJE_amMQ?purpose=inline)
+
+[subscription.packtpub.com](https://subscription.packtpub.com/book/web-development/9781836202073/1/ch01lvl1sec05/scaffolding-a-django-project-and-app?utm_source=chatgpt.com)
+
+Practical Completed
+
+ 1.5 What is a Django Project?
+
+Definition:
+
+A Django project is the complete web application configuration that contains settings, URL configurations, and one or more Django apps.
+
+Example:
+
+Suppose you are building an institute management website.
+
+Your project can contain:
+
+- Student App
+- Teacher App
+- Course App
+- Payment App
+- Authentication App
+
+All these apps work together inside one Django project.
+
+ Create a Project
+
+
+django-admin startproject myproject
+
+
+ 1.6 What is a Django App?
+
+Definition:
+
+A Django app is a small, independent module responsible for a particular functionality of a project.
+
+Example:
+
+In a school management project:
+
+- Student app manages students.
+- Teacher app manages teachers.
+- Fees app manages payments.
+- Attendance app manages attendance.
+
+ Create an App
+
+
+python manage.py startapp students
+
+
+ Difference Between Project and App
+
+| Project                      | App                                 |
+| ---------------------------- | ----------------------------------- |
+| Complete website/application | Part of a project                   |
+| Contains configuration       | Contains specific functionality     |
+| Can contain multiple apps    | Can be reused in different projects |
+| Created using startproject   | Created using startapp              |
+
+Important: A Django project can have multiple apps, and an app can be reusable across multiple projects.
+
+ 1.7 Django Project Structure
+
+After creating a project, the folder structure looks like this:
+
+
+myproject/
+│
+├── manage.py
+│
+└── myproject/
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    ├── asgi.py
+    └── wsgi.py
+
+
+Let's understand every file.
+
+ 1. manage.py
+
+Definition: manage.py is a command-line utility used to manage a Django project.
+
+It allows us to:
+
+- Run the development server.
+- Create applications.
+- Run database migrations.
+- Create superusers.
+- Execute management commands.
+
+Example:
+
+
+python manage.py runserver
+
+
+
+python manage.py startapp students
+
+
+
+python manage.py migrate
+
+
+ 2. settings.py
+
+Definition: settings.py contains the configuration of a Django project.
+
+It manages:
+
+- Installed applications
+- Database configuration
+- Middleware
+- Templates
+- Static files
+- Security settings
+- Time zone
+- Debug mode
+
+Example:
+
+
+DEBUG = TrueALLOWED_HOSTS = []INSTALLED_APPS = [    'django.contrib.admin',    'django.contrib.auth',    'django.contrib.contenttypes',    'django.contrib.sessions',    'django.contrib.messages',    'django.contrib.staticfiles',]
+
+
+When you create an app, you should add it to `INSTALLED_APPS`.
+
+Example:
+
+
+INSTALLED_APPS = [    'django.contrib.admin',    'django.contrib.auth',    'django.contrib.contenttypes',    'django.contrib.sessions',    'django.contrib.messages',    'django.contrib.staticfiles',    'students',]
+
+
+ 3. urls.py
+
+Definition: urls.py contains URL patterns that connect URLs with their respective views.
+
+Example:
+
+
+from django.urls import pathfrom django.http import HttpResponsedef home(request):    return HttpResponse("Welcome to Django")urlpatterns = [    path('', home),]
+
+
+ 4. wsgi.py
+
+WSGI stands for Web Server Gateway Interface.
+
+It is used to connect a Django synchronous application with compatible web servers.
+
+Example: Gunicorn can serve Django applications using WSGI.
+
+ 5. asgi.py
+
+ASGI stands for Asynchronous Server Gateway Interface.
+
+It supports asynchronous applications and protocols such as WebSockets when configured with appropriate ASGI components.
+
+Example: Django applications can use an ASGI server such as Uvicorn or Daphne.
+
+ 6. init.py
+
+It marks a directory as a Python package and can also contain package initialization code.
+
+ 1.8 Development Server
+
+Definition:
+
+The Django development server is a lightweight server provided by Django for testing and developing applications locally.
+
+Command:
+
+
+python manage.py runserver
+
+
+Default address:
+
+
+http://127.0.0.1:8000/
+
+
+Run on a different port:
+
+
+python manage.py runserver 8080
+
+
+Now open:
+
+
+http://127.0.0.1:8080/
+
+
+Run on all available network interfaces:
+
+
+python manage.py runserver 0.0.0.0:8000
+
+
+Important: Django's development server is not designed for production deployment.
+
+# 2. URLs and Views
+
+This section is very important because URLs and Views connect user requests with application functionality.
+
+ 2.1 What is URL Routing?
+
+Definition:
+
+URL routing is the process of matching a requested URL with a particular view function or class.
+
+Example:
+
+Suppose you have a website:
+
+
+http://127.0.0.1:8000/
+
+
+Different URLs can perform different operations.
+
+| URL          | Functionality |
+| ------------ | ------------- |
+| `/`          | Home page     |
+| `/about/`    | About page    |
+| `/contact/`  | Contact page  |
+| `/students/` | Student list  |
+
+Django checks the URL patterns and executes the matching view.
+
+ 2.2 path()
+
+Definition:
+
+`path()` is used to define URL patterns in Django.
+
+Syntax:
+
+
+path(route, view, kwargs=None, name=None)
+
+
+Example:
+
+views.py
+
+
+from django.http import HttpResponsedef home(request):    return HttpResponse("Welcome to Home Page")def about(request):    return HttpResponse("This is About Page")def contact(request):    return HttpResponse("Contact Us")
+
+
+urls.py
+
+
+from django.urls import pathfrom . import viewsurlpatterns = [    path('', views.home),    path('about/', views.about),    path('contact/', views.contact),]
+
+
+Output:
+
+- `/` → Welcome to Home Page
+- `/about/` → This is About Page
+- `/contact/` → Contact Us
+
+ 2.3 re_path()
+
+Definition:
+
+`re_path()` is used to define URL patterns using regular expressions.
+
+It is useful when you need more flexible URL matching.
+
+Example:
+
+
+from django.urls import re_pathfrom django.http import HttpResponsedef student(request, id):    return HttpResponse(f"Student ID: {id}")urlpatterns = [    re_path(r'^student/(?P<id>[0-9]+)/$', student),]
+
+
+URL:
+
+
+/student/101/
+
+
+Output:
+
+
+Student ID: 101
+
+
+Here:
+
+- `^` means start of the URL pattern.
+- `$` means end of the URL pattern.
+- `[0-9]+` means one or more digits.
+- `(?P<id>...)` captures a named value called id.
+
+ Difference Between path() and re_path()
+
+| path()                         | re_path()                   |
+| ------------------------------ | --------------------------- |
+| Uses simple URL patterns       | Uses regular expressions    |
+| Easy to read                   | More flexible               |
+| Supports built-in converters   | Supports regex patterns     |
+| Preferred for most normal URLs | Useful for complex patterns |
+
+ 2.4 include()
+
+Definition:
+
+`include()` is used to connect an app's URL configuration with the main project URL configuration.
+
+It helps organize URLs in large projects.
+
+Suppose your project has:
+
+
+myproject/
+│
+├── myproject/
+│   └── urls.py
+│
+└── students/
+    ├── views.py
+    └── urls.py
+
+
+First, create `students/urls.py`.
+
+
+from django.urls import pathfrom . import viewsurlpatterns = [    path('', views.student_home),    path('list/', views.student_list),]
+
+
+Now create views:
+
+students/views.py
+
+
+from django.http import HttpResponsedef student_home(request):    return HttpResponse("Student Home Page")def student_list(request):    return HttpResponse("All Students")
+
+
+Now connect the app to the main project.
+
+myproject/urls.py
+
+
+from django.contrib import adminfrom django.urls import path, includeurlpatterns = [    path('admin/', admin.site.urls),    path('students/', include('students.urls')),]
+
+
+Now these URLs will work:
+
+
+/students/
+/students/list/
+
+
+Why use include()?
+
+Without include(), you may need to write all application URLs inside the main project URL file.
+
+Using include() keeps every app's URLs separate and organized.
+
+ 2.5 Function-Based Views (FBV)
+
+Definition:
+
+A Function-Based View is a normal Python function that receives an HTTP request and returns an HTTP response.
+
+Syntax:
+
+
+def view_name(request):    # Application logic    return response
+
+
+ Example 1: Simple FBV
+
+views.py
+
+
+from django.http import HttpResponsedef home(request):    return HttpResponse("Welcome to Django")
+
+
+urls.py
+
+
+from django.urls import pathfrom . import viewsurlpatterns = [    path('', views.home, name='home'),]
+
+
+ Example 2: Using Request Method
+
+
+from django.http import HttpResponsedef home(request):    if request.method == 'GET':        return HttpResponse("This is GET Request")    elif request.method == 'POST':        return HttpResponse("This is POST Request")    return HttpResponse("Method Not Allowed", status=405)
+
+
+ Example 3: Passing Data to Template
+
+views.py
+
+
+from django.shortcuts import renderdef home(request):    student = {        'name': 'Rahul',        'age': 22,        'course': 'Python'    }    return render(request, 'home.html', student)
+
+
+home.html
+
+
+<h1>Student Details</h1>
+
+<h2>Name: {{ name }}</h2>
+<h2>Age: {{ age }}</h2>
+<h2>Course: {{ course }}</h2>
+
+
+Output:
+
+
+Student Details
+
+Name: Rahul
+Age: 22
+Course: Python
+
+
+ Advantages of FBV
+
+- Easy to understand.
+- Easy to write.
+- Good for beginners.
+- Suitable for simple and custom logic.
+- Provides direct control over request handling.
+
+ 2.6 Class-Based Views (CBV)
+
+Definition:
+
+Class-Based Views are views written using Python classes instead of normal functions.
+
+They allow developers to organize reusable view logic using inheritance and methods.
+
+Example:
+
+views.py
+
+
+from django.views import Viewfrom django.http import HttpResponseclass HomeView(View):    def get(self, request):        return HttpResponse("This is GET Request")    def post(self, request):        return HttpResponse("This is POST Request")
+
+
+urls.py
+
+
+from django.urls import pathfrom .views import HomeViewurlpatterns = [    path('', HomeView.as_view(), name='home'),]
+
+
+ Important Concept: as_view()
+
+`as_view()` converts a class-based view into a callable view that Django can use in URL patterns.
+
+ Important CBV Methods
+
+| Method     | Purpose                                  |
+| ---------- | ---------------------------------------- |
+| get()      | Handle GET request                       |
+| post()     | Handle POST request                      |
+| put()      | Handle PUT request                       |
+| delete()   | Handle DELETE request                    |
+| dispatch() | Routes request to the appropriate method |
+
+ 2.7 Generic Class-Based Views
+
+Definition:
+
+Generic Class-Based Views are ready-made views provided by Django for common operations.
+
+They reduce the amount of code developers need to write.
+
+Some important generic views:
+
+| Generic View | Purpose                       |
+| ------------ | ----------------------------- |
+| TemplateView | Display an HTML template      |
+| ListView     | Display a list of objects     |
+| DetailView   | Display details of one object |
+| CreateView   | Create a new object           |
+| UpdateView   | Update an existing object     |
+| DeleteView   | Delete an object              |
+
+ Example 1: TemplateView
+
+
+from django.views.generic import TemplateViewclass HomeView(TemplateView):    template_name = 'home.html'
+
+
+URL:
+
+
+from django.urls import pathfrom .views import HomeViewurlpatterns = [    path('', HomeView.as_view(), name='home'),]
+
+
+ Example 2: ListView
+
+Suppose you have a Student model.
+
+models.py
+
+
+from django.db import modelsclass Student(models.Model):    name = models.CharField(max_length=100)    age = models.IntegerField()
+
+
+views.py
+
+
+from django.views.generic import ListViewfrom .models import Studentclass StudentListView(ListView):    model = Student    template_name = 'students.html'    context_object_name = 'students'
+
+
+students.html
+
+
+<h1>All Students</h1>
+
+{% for student in students %}
+    <h2>{{ student.name }}</h2>
+    <p>{{ student.age }}</p>
+{% endfor %}
+
+
+ FBV vs CBV
+
+| FBV                          | CBV                       |
+| ---------------------------- | ------------------------- |
+| Uses functions               | Uses classes              |
+| Simple to understand         | Requires OOP knowledge    |
+| Uses normal function logic   | Uses methods              |
+| Easy for custom simple views | Useful for reusable views |
+| Direct control               | Supports inheritance      |
+
+Which one should you use?
+
+Both are useful. Use FBV when the logic is simple or highly customized. Use CBV when you want reusable behavior and want to take advantage of Django's generic views.
+
+ 2.8 Path Converters
+
+Definition:
+
+Path converters are used to capture dynamic values from URLs and pass them to views.
+
+Django provides several built-in path converters.
+
+| Converter | Accepts                                   | Example        |
+| --------- | ----------------------------------------- | -------------- |
+| str       | Any non-empty string except `/`           | rahul          |
+| int       | Positive integer                          | 101            |
+| slug      | Letters, numbers, hyphens and underscores | python-course  |
+| uuid      | UUID value                                | UUID string    |
+| path      | Any non-empty string including `/`        | courses/python |
+
+ Example 1: int Converter
+
+urls.py
+
+
+from django.urls import pathfrom . import viewsurlpatterns = [    path('student/<int:id>/', views.student),]
+
+
+views.py
+
+
+from django.http import HttpResponsedef student(request, id):    return HttpResponse(f"Student ID is {id}")
+
+
+URL:
+
+
+/student/101/
+
+
+Output:
+
+
+Student ID is 101
+
+
+ Example 2: str Converter
+
+
+path('user/<str:name>/', views.user)
+
+
+
+def user(request, name):    return HttpResponse(f"Welcome {name}")
+
+
+URL:
+
+
+/user/Rahul/
+
+
+Output:
+
+
+Welcome Rahul
+
+
+ Example 3: Multiple Parameters
+
+
+path('student/<str:name>/<int:age>/', views.student)
+
+
+
+def student(request, name, age):    return HttpResponse(        f"Name: {name}, Age: {age}"    )
+
+
+URL:
+
+
+/student/Rahul/22/
+
+
+Output:
+
+
+Name: Rahul, Age: 22
+
+
+ 2.9 Named URLs
+
+Definition:
+
+Named URLs allow us to give a unique name to a URL pattern.
+
+They make URL management easier.
+
+Example:
+
+
+urlpatterns = [    path('', views.home, name='home'),    path('about/', views.about, name='about'),]
+
+
+Here:
+
+- `home` is the name of the home URL.
+- `about` is the name of the about URL.
+
+In a template:
+
+
+<a href="{% url 'home' %}">Home</a>
+
+<a href="{% url 'about' %}">About</a>
+
+
+Why use named URLs?
+
+Suppose you change the URL from:
+
+
+/about/
+
+
+to:
+
+
+/about-us/
+
+
+You do not need to update every template link that uses the named URL.
+
+Django automatically generates the updated URL.
+
+ 2.10 reverse()
+
+Definition:
+
+`reverse()` is a Django function used to generate a URL using its URL pattern name.
+
+Example:
+
+
+from django.urls import reversefrom django.http import HttpResponsedef home(request):    url = reverse('about')    return HttpResponse(f"About URL is: {url}")
+
+
+If the URL name is `about`, the output will be:
+
+
+About URL is: /about/
+
+
+ reverse() with Dynamic Parameters
+
+urls.py
+
+
+path('student/<int:id>/', views.student, name='student')
+
+
+views.py
+
+
+from django.urls import reversedef home(request):    url = reverse('student', kwargs={'id': 101})    return HttpResponse(url)
+
+
+Output:
+
+
+/student/101/
+
+
+ reverse() vs

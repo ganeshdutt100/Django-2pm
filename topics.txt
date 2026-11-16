@@ -1,0 +1,30 @@
+
+1. Prerequisites
+Python basics (OOP, functions, decorators, virtual env, pip)
+HTML, CSS, JavaScript,React
+HTTP basics (GET/POST, status codes, cookies, sessions)
+SQL basics aur Git
+
+2. Django Basics
+Django kya hai, MVT architecture (Model-View-Template)
+Installation, virtual environment setup
+Project vs App, startproject aur startapp
+Project structure: settings.py, urls.py, manage.py
+Development server chalana
+
+3. URLs aur Views
+URL routing, path(), re_path(), include()
+Function-Based Views (FBV)
+Class-Based Views (CBV) aur generic views
+--  Path converters, named URLs, reverse()
+HttpRequest / HttpResponse, redirect, 404 handling
+
+4. Templates
+Django Template Language (DTL)
+Variables, tags, filters
+Template inheritance (extends, block, include)
+Static files aur media files
+Custom template tags aur filters
+
+
+
