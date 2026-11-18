@@ -1216,3 +1216,96 @@ Output:
 
 
  reverse() vs
+
+
+
+
+ Models aur ORM
+
+Django ORM & Migrations – Complete Notes
+PART 1: ORM (Object Relational Mapping)
+1. What is ORM?
+ORM stands for Object Relational Mapping.
+
+ORM is a technique that allows developers to interact with a database using programming language objects instead of writing SQL queries manually.
+
+In Django, ORM allows us to communicate with databases using Python code.
+
+In simple words:
+
+Django ORM helps us perform database operations using Python without writing SQL queries.
+Without ORM (Using SQL)
+Suppose we want to insert a student into a database.
+
+without ORM
+INSERT INTO students (name, age, course)
+VALUES ('Ganesh', 25, 'Python');
+
+with ORM
+student.objects.create(
+    name="Priya",
+    age=22,
+    course='Python'
+)
+Notice the difference:
+- SQL requires writing SQL queries.
+- Django ORM allows us to use Python code.
+- Django automatically converts ORM operations into SQL queries.
+
+2. Why Do We Use ORM?
+ORM is used to make database operations easier, faster to develop, and more manageable.
+
+Main benefits:
+1. No need to write SQL manually: We can perform database operations using Python.
+2. Database independence: We can work with different supported databases like SQLite, MySQL and PostgreSQL with minimal code changes.
+3. Easy database management: We can create, update, delete and retrieve records using Python.
+4. Security: Django ORM uses parameterized queries for normal ORM operations, helping protect against SQL injection.
+5. Readable code: Python code is generally easier to maintain than manually writing SQL everywhere.
+6. Relationship management: We can easily work with ForeignKey, OneToOneField and ManyToManyField.
+7. Faster development: Developers can focus on application logic instead of repeatedly writing SQL queries
+
+Student.objects.create(name="Ganesh")
+
+
+Django ORM
+
+Converts Python ORM operations into SQL
+
+
+SQL Query
+
+INSERT INTO student ...
+
+
+Database
+
+Record gets stored in the database
+
+Step-by-step working:
+1. Developer writes Python ORM code.
+2. Django ORM converts that code into an SQL query.
+3. Database executes the SQL query.
+4. Database returns the result.
+5. Django ORM converts the result into Python objects.
+Important: ORM does not replace the database. It provides an easier way to communicate with the database.
+
+
+4. What is a Model in Django?
+A Model is a Python class that represents a database table.
+
+Each model field represents a column in the database table.
+
+Let's create a Student model.
+from django.db import models
+
+class Student(models.Model):
+
+    name = models.CharField(max_length=100)
+
+    age = models.IntegerField()
+
+    email = models.EmailField()
+
+    course = models.CharField(max_length=100)
+
+    created_at = models.DateTimeField(auto_now_add=True)

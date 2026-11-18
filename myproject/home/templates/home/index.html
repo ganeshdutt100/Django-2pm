@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>मेरा होम पेज</title>
+  </head>
+  <body>
+    <h1>नमस्ते, {{ name }}!</h1>
+    <p>यह मेरा पहला Django template है।</p>
+
+    <h2>Students की लिस्ट</h2>
+    <ul>
+      {% for student in students %}
+      <li>{{ student.name }} ({{ student.age }} साल)</li>
+      {% empty %}
+      <li>अभी कोई student नहीं है।</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
