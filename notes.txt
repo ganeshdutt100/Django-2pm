@@ -1309,3 +1309,32 @@ class Student(models.Model):
     course = models.CharField(max_length=100)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    --------------------------
+
+    Common Field Types
+Field                                             	Kaam
+
+CharField(max_length=)	               Chhota text (name, title)
+TextField                               	Lamba text (description)
+IntegerField, PositiveIntegerField	        Integer numbers
+DecimalField(max_digits, decimal_places)	Paisa/price (exact value)
+FloatField	                                  Approx decimal
+BooleanField	                              True/False
+DateField, DateTimeField, TimeField	           Date/time
+EmailField, URLField, SlugField	                    Validated text
+FileField, ImageField	               File upload (ImageField ke liye pip install Pillow)
+UUIDField, JSONField	               UUID aur JSON data
+
+Common Field Options---------------------------------------------
+Option	                                    Matlab
+null=True	                        DB me NULL allowed (DB level)
+blank=True	                        Form/validation me khaali allowed
+default=	                        Default value
+unique=True                        	Duplicate nahi chalega
+choices=	                       Fixed options ki list
+db_index=True	                   Search fast karne ke liye index
+verbose_name, help_text	           Admin/forms me display text
+editable=False	                    Admin/forms me nahi dikhega
+auto_now_add=True	                 Sirf create hote waqt time set
+auto_now=True                            	Har save pe time update
