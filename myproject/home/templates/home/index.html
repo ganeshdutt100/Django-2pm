@@ -1,4 +1,4 @@
-<!doctype html>
+{% comment %} <!doctype html>
 <html lang="hi">
   <head>
     <meta charset="UTF-8" />
@@ -19,6 +19,18 @@
     </ul>
   </body>
 </html>
+{% endcomment %}
+<form method="POST">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="Name" required />
+  <input type="number" name="age" placeholder="Age" required />
+  <input type="text" name="city" placeholder="City" />
+  <button type="submit">Add</button>
+</form>
 
-{% comment %} python manage.py makemigrations python manage.py migrate {%
-endcomment %}
+<h3>All Students</h3>
+<ul>
+  {% for s in students %}
+  <li>{{ s.name }} - {{ s.age }} - {{ s.city }}</li>
+  {% endfor %}
+</ul>
