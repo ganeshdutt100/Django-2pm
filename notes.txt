@@ -1338,3 +1338,16 @@ verbose_name, help_text	           Admin/forms me display text
 editable=False	                    Admin/forms me nahi dikhega
 auto_now_add=True	                 Sirf create hote waqt time set
 auto_now=True                            	Har save pe time update
+
+
+
+----
+from home.models import Student
+
+Student.objects.create(name="Rahul", age=20)
+Student.objects.create(name="Aman", age=22)
+
+Student.objects.all()
+
+python manage.py createsuperuser
+python manage.py runserver
