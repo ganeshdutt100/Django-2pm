@@ -1,0 +1,11 @@
+{% extends 'menu/base.html' %} {% block content %}
+<h1>Today's menu</h1>
+{% for item in items %}
+<div>
+  <img src="{{ item.image.url }}" width="120" />
+  <h3>{{ item.name }} - ₹{{ item.price }}</h3>
+  <p>{{ item.description }}</p>
+</div>
+{% empty %}
+<p>No dishes yet.</p>
+{% endfor %} {% endblock %}

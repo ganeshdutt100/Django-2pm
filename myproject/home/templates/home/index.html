@@ -1,36 +1,53 @@
-{% comment %} <!doctype html>
+<!doctype html>
 <html lang="hi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>मेरा होम पेज</title>
+    <title>Students</title>
   </head>
   <body>
-    <h1>नमस्ते, {{ name }}!</h1>
-    <p>यह मेरा पहला Django template है।</p>
+    <p>Hello, <b>{{ request.user.username }}</b></p>
+    <form method="POST" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
 
-    <h2>Students की लिस्ट</h2>
-    <ul>
-      {% for student in students %}
-      <li>{{ student.name }} ({{ student.age }} साल)</li>
+    <h2>Add Student</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="number" name="age" placeholder="Age" required />
+      <input type="text" name="city" placeholder="City" />
+      <button type="submit">Add</button>
+    </form>
+
+    <h2>All Students</h2>
+    <table border="1" cellpadding="8">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Action</th>
+      </tr>
+      {% for s in students %}
+      <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.age }}</td>
+        <td>{{ s.city }}</td>
+        <td>
+          <form method="POST" action="{% url 'delete_student' s.id %}">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
       {% empty %}
-      <li>अभी कोई student नहीं है।</li>
+      <tr>
+        <td colspan="5">Koi student nahi hai</td>
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
   </body>
 </html>
-{% endcomment %}
-<form method="POST">
-  {% csrf_token %}
-  <input type="text" name="name" placeholder="Name" required />
-  <input type="number" name="age" placeholder="Age" required />
-  <input type="text" name="city" placeholder="City" />
-  <button type="submit">Add</button>
-</form>
-
-<h3>All Students</h3>
-<ul>
-  {% for s in students %}
-  <li>{{ s.name }} - {{ s.age }} - {{ s.city }}</li>
-  {% endfor %}
-</ul>
